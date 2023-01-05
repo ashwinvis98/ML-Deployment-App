@@ -1,0 +1,9 @@
+# Build command: 
+# gcloud builds submit --region us-central1 --config react-cloudbuild.yaml
+# NOTE: Make sure you increment the image version number or else your changes
+#       won't get reflected in the build.
+steps:
+- name: 'gcr.io/cloud-builders/docker'
+  args: [ 'build',
+  '-t', 'us-central1-docker.pkg.dev/ml-deployment-app-370904/ml-deployment-repo/ml-deployment-react:v2', '.' ]
+images: ['us-central1-docker.pkg.dev/ml-deployment-app-370904/ml-deployment-repo/ml-deployment-react:v2']

@@ -1,0 +1,37 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: model_name
+  labels:
+    app: model_name
+spec:
+  ports:
+    - protocol: "TCP"
+      port: 50051
+      targetPort: 50051
+  selector:
+    app: model_name
+  type: LoadBalancer
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: model_name
+spec:
+  selector:
+    matchLabels:
+      app: model_name
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: model_name
+    spec:
+      containers:
+      - name: model_name
+        image: us-central1-docker.pkg.dev/ml-deployment-app-370904/ml-deployment-repo/ml-deployment-grpc:model_name_v5
+        imagePullPolicy: Always
+        resources:
+          requests:
+            cpu: 100m
+            memory: 100Mi

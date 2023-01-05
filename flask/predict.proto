@@ -1,0 +1,16 @@
+// Compiled using the following command from same directory as predict.proto:
+// python -m grpc_tools.protoc -I. --python_out=. --grpc_python_out=. predict.proto
+
+syntax = "proto3";
+
+service predict {
+  rpc Predict(modelInput) returns (modelOutput) {}
+}
+
+message modelInput {
+  repeated float X = 1 [packed = true];
+}
+
+message modelOutput {
+    repeated float preds = 1 [packed = true];
+}

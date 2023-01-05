@@ -1,0 +1,5 @@
+steps:
+- name: 'gcr.io/cloud-builders/docker'
+  args: [ 'build', '-f', 'grpc-base.Dockerfile',
+  '-t', 'us-central1-docker.pkg.dev/ml-deployment-app-370904/ml-deployment-repo/ml-deployment-grpc-base:latest', '.' ]
+images: ['us-central1-docker.pkg.dev/ml-deployment-app-370904/ml-deployment-repo/ml-deployment-grpc-base:latest']

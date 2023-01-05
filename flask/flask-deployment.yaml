@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flask
+spec:
+  selector:
+    matchLabels:
+      app: flask
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: flask
+    spec:
+      containers:
+      - name: flask
+        image: us-central1-docker.pkg.dev/ml-deployment-app-370904/ml-deployment-repo/ml-deployment-flask:v19
+        imagePullPolicy: IfNotPresent
+        resources:
+          requests:
+            cpu: 100m
+            memory: 100Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: flask
+  labels:
+    app: flask
+spec:
+  ports:
+    - protocol: "TCP"
+      port: 5000
+      targetPort: 5000
+  selector:
+    app: flask
+  type: LoadBalancer

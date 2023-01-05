@@ -1,0 +1,9 @@
+steps:
+- name: 'gcr.io/cloud-builders/docker'
+  args: [ 'build',
+  '--build-arg', 'MODEL_NAME=model_name',
+  '--build-arg', 'MODEL_BUCKET=model_bucket',
+  '--build-arg', 'DATA_BUCKET=data_bucket',
+  '-f', 'grpc.Dockerfile',
+  '-t', 'us-central1-docker.pkg.dev/ml-deployment-app-370904/ml-deployment-repo/ml-deployment-grpc:model_name_v5', '.' ]
+images: ['us-central1-docker.pkg.dev/ml-deployment-app-370904/ml-deployment-repo/ml-deployment-grpc:model_name_v5']
